@@ -1,0 +1,34 @@
+// display
+@each $i in (flex, block, inline-flex) {
+  .d-#{$i} {
+    display: #{$i};
+  }
+}
+
+// flext
+@each $i in (row, column) {
+  .flex-#{$i} {
+    flex-direction: #{$i};
+  }
+}
+
+// height
+@each $i in (10, 25, 50, 100) {
+  .h-#{$i} {
+    height: #{$i}#{"%"};
+  }
+}
+
+// justify-content
+@each $i in (start, end, center) {
+  .justify-content-#{$i} {
+    justify-content: #{$i};
+  }
+}
+
+// align-items
+@each $i in (start, end, center) {
+  .align-items-#{$i} {
+    align-items: #{$i};
+  }
+}

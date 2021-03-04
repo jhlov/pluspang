@@ -1,0 +1,19 @@
+.title {
+  margin-bottom: 40px;
+  font-size: 40px;
+}
+
+.menu-item {
+  cursor: pointer;
+  border: 1px solid lightgray;
+  width: 400px;
+  text-align: center;
+  padding: 14px 0;
+  margin: 8px 0;
+  font-size: 20px;
+  background-color: white;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
