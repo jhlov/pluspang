@@ -1,5 +1,5 @@
-import "./App.scss";
 import "styles/style.scss";
+import "./App.scss";
 
 import Game from "components/game/Game";
 import Menu from "components/menu/Menu";

@@ -1,0 +1,16 @@
+.btn {
+  cursor: pointer;
+  background: #faf8ef;
+  border: 1px solid lightgray;
+  text-align: center;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+a.btn {
+  color: #776e65;
+  text-decoration: none;
+}

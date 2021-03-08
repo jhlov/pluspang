@@ -7,13 +7,13 @@ const Menu = () => {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center h-100">
       <div className="title">PLUSPANG</div>
-      <Link to="/game" className="menu-item">
+      <Link to="/game" className="btn menu-item">
         1 to 20
       </Link>
-      <Link to="/game" className="menu-item">
+      <Link to="/game" className="btn menu-item">
         random
       </Link>
-      <Link to="/rank" className="menu-item">
+      <Link to="/rank" className="btn menu-item">
         rank
       </Link>
     </div>
