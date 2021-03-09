@@ -1,8 +1,12 @@
+import "./Game.scss";
+
+import Cell from "components/game/Cell";
 import React from "react";
 
 const Game = () => {
   return (
-    <div className="p-20">
+    <div>
+      {/* 상단 */}
       <div className="d-flex">
         <div className="flex-4">
           <div className="card">
@@ -21,6 +25,17 @@ const Game = () => {
             <div className="card-body">10.22</div>
           </div>
         </div>
+      </div>
+
+      {/* 하단 */}
+      <div className="board mt-40">
+        <Cell value={1} />
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
       </div>
     </div>
   );

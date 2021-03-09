@@ -1,3 +1,7 @@
+https://poweroftwo.nemoidstudio.com/1024
+https://zzzscore.com/1to50/en/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
