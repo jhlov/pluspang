@@ -44,8 +44,22 @@ const Game = () => {
     [numberList]
   );
 
+  const onEnterCell = useCallback(
+    (index) => {
+      if (isDrag) {
+        console.log("onEnterCell", index);
+      }
+    },
+    [isDrag]
+  );
+
+  const onMouseUp = () => {
+    console.log("onMouseUp");
+    setIsDrag(false);
+  };
+
   return (
-    <div>
+    <div onMouseUp={onMouseUp}>
       {/* 상단 */}
       <div className="d-flex">
         <div className="flex-4">
@@ -75,6 +89,7 @@ const Game = () => {
             key={index}
             index={index}
             onClickCell={onClickCell}
+            onEnterCell={onEnterCell}
           />
         ))}
       </div>

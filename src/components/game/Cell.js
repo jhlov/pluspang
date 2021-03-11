@@ -1,8 +1,12 @@
 import React from "react";
 
-const Cell = ({ value, index, onClickCell }) => {
+const Cell = ({ value, index, onClickCell, onEnterCell }) => {
   return (
-    <div className="cell" onClick={() => onClickCell(index)}>
+    <div
+      className="cell"
+      onMouseDown={() => onClickCell(index)}
+      onMouseEnter={() => onEnterCell(index)}
+    >
       {value}
     </div>
   );
