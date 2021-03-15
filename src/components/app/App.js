@@ -13,7 +13,7 @@ function App() {
       <div className="container">
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Route path="/" component={Menu} exact={true} />
-          <Route path="/game" component={Game} />
+          <Route path="/game/:gameType" component={Game} />
           <Route path="/rank" component={Rank} />
         </BrowserRouter>
       </div>

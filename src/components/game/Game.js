@@ -3,10 +3,15 @@ import "./Game.scss";
 import React, { useCallback, useEffect, useState } from "react";
 
 import Cell from "components/game/Cell";
+import { useParams } from "react-router-dom";
 
 const Game = () => {
   // 숫자판
   const [numberList, setNumberList] = useState([]);
+
+  // 시간
+  const [startTime, setStartTime] = useState(Date.now());
+  const [curTime, setCurTime] = useState(0);
 
   // 현재 드래그 중인지 체크
   const [isDrag, setIsDrag] = useState(false);
@@ -17,6 +22,8 @@ const Game = () => {
   // 목표 숫자
   const [targetNumber, setTargetNumber] = useState("");
 
+  let { gameType } = useParams();
+
   // 최초 설정
   useEffect(() => {
     let arr = new Array(25);
@@ -25,7 +32,20 @@ const Game = () => {
     }
     setNumberList(arr);
     setTargetNumber(getTargetNumber());
+
+    setInterval(updateTime, 50);
+
+    console.log("mounted");
   }, []);
+
+  const updateTime = () => {
+    const deltaTime = (Date.now() - startTime) / 1000;
+    if (gameType === "1to20") {
+      setCurTime(deltaTime.toFixed(2));
+    } else {
+      setCurTime((60 - deltaTime).toFixed(2));
+    }
+  };
 
   const getCellNumber = () => {
     // 작은 숫자가 많이 나오도록
@@ -91,7 +111,7 @@ const Game = () => {
         <div className="flex-1">
           <div className="card">
             <div className="card-header">TIME</div>
-            <div className="card-body">10.22</div>
+            <div className="card-body">{curTime}</div>
           </div>
           <div className="card">
             <div className="card-header">BEST</div>
