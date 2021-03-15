@@ -1,9 +1,10 @@
 import React from "react";
+import classNames from "classnames";
 
-const Cell = ({ value, index, onClickCell, onEnterCell }) => {
+const Cell = ({ value, index, clicked, onClickCell, onEnterCell }) => {
   return (
     <div
-      className="cell"
+      className={classNames("cell", { clicked })}
       onMouseDown={() => onClickCell(index)}
       onMouseEnter={() => onEnterCell(index)}
     >

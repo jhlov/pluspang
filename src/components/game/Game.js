@@ -11,8 +11,8 @@ const Game = () => {
   // 현재 드래그 중인지 체크
   const [isDrag, setIsDrag] = useState(false);
 
-  // 마지막으로 드래그한 셀의 인덱스
-  const [lastIndex, setLastIndex] = useState(null);
+  // 현재 드래그 중인 cell 인덱스 리스트
+  const [dragCellList, setDragCellList] = useState([]);
 
   // 목표 숫자
   const [targetNumber, setTargetNumber] = useState("");
@@ -21,13 +21,14 @@ const Game = () => {
   useEffect(() => {
     let arr = new Array(25);
     for (let i = 0; i < arr.length; ++i) {
-      arr[i] = getRandomNumber();
+      arr[i] = getCellNumber();
     }
     setNumberList(arr);
     setTargetNumber(getTargetNumber());
   }, []);
 
-  const getRandomNumber = () => {
+  const getCellNumber = () => {
+    // 작은 숫자가 많이 나오도록
     const arr = [1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
     return arr[parseInt(Math.random() * arr.length)];
   };
@@ -36,26 +37,44 @@ const Game = () => {
     return parseInt(Math.random() * 5) + 1;
   };
 
-  const onClickCell = useCallback(
-    (index) => {
-      console.log("onClickCell", index, numberList[index]);
-      setIsDrag(true);
-    },
-    [numberList]
-  );
+  const getDragCellSum = () => {
+    return dragCellList.reduce(
+      (accumulator, currentValue) => accumulator + numberList[currentValue],
+      0
+    );
+  };
+
+  const processDrag = (index) => {
+    if (!dragCellList.includes(index)) {
+      console.log("processDrag", index);
+      setDragCellList([index, ...dragCellList]);
+    }
+  };
+
+  const onClickCell = useCallback((index) => {
+    console.log("onClickCell", index);
+    setIsDrag(true);
+    processDrag(index);
+  }, []);
 
   const onEnterCell = useCallback(
     (index) => {
       if (isDrag) {
         console.log("onEnterCell", index);
+        processDrag(index);
       }
     },
-    [isDrag]
+    [isDrag, dragCellList]
   );
 
   const onMouseUp = () => {
     console.log("onMouseUp");
+    console.log(dragCellList, getDragCellSum());
+
+    // TODO: 정답 체크
+
     setIsDrag(false);
+    setDragCellList([]);
   };
 
   return (
@@ -88,6 +107,7 @@ const Game = () => {
             value={number}
             key={index}
             index={index}
+            clicked={dragCellList.includes(index)}
             onClickCell={onClickCell}
             onEnterCell={onEnterCell}
           />

@@ -19,5 +19,13 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    &.clicked {
+      background: #ede0c8;
+    }
+
+    &::selection {
+      background-color: unset;
+    }
   }
 }
