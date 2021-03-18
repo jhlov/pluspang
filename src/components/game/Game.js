@@ -146,30 +146,41 @@ const Game = () => {
   return (
     <div onMouseUp={onMouseUp}>
       {/* 상단 */}
-      <div className="d-flex">
-        <div className="flex-4">
-          <div className="card">
-            <div className="card-header">TARGET NUMBER</div>
-            <div className="card-body">{targetNumber}</div>
-          </div>
+      <div className="card card-number mb-20">
+        <div className="card-header">TARGET NUMBER</div>
+        <div className="card-body">{targetNumber}</div>
+      </div>
+      <div className="d-flex justify-content-flex-end">
+        <div className="card">
+          <div className="card-header">TIME</div>
+          <div className="card-body">{curTime}</div>
         </div>
-
-        <div className="flex-1">
+        {gameType === "1to20" && (
           <div className="card">
-            <div className="card-header">TIME</div>
-            <div className="card-body">{curTime}</div>
+            <div className="card-header">BEST-TIME</div>
+            <div className="card-body">{score}</div>
           </div>
-          {gameType === "random" && (
-            <div className="card">
-              <div className="card-header">SCORE</div>
-              <div className="card-body">{score}</div>
+        )}
+        {gameType === "random" && (
+          <div className="card">
+            <div className="card-header">SCORE</div>
+            <div className="card-body">{score}</div>
+          </div>
+        )}
+        {gameType === "random" && (
+          <div className="card">
+            <div className="card-header">
+              BEST
+              <br />
+              SCORE
             </div>
-          )}
-        </div>
+            <div className="card-body">{score}</div>
+          </div>
+        )}
       </div>
 
       {/* 하단 */}
-      <div className="board mt-40">
+      <div className="board">
         {numberList.map((number, index) => (
           <Cell
             value={number}
