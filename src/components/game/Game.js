@@ -19,13 +19,21 @@ const Game = () => {
   // 현재 드래그 중인 cell 인덱스 리스트
   const [dragCellList, setDragCellList] = useState([]);
 
+  // 정답을 맞춘 셀 리스트
+  const [answerCellList, setAnswerCellList] = useState([]);
+
   // 목표 숫자
-  const [targetNumber, setTargetNumber] = useState("");
+  const [targetNumber, setTargetNumber] = useState(0);
+
+  // 점수
+  const [score, setScore] = useState(0); // random 일 경우만
 
   let { gameType } = useParams();
 
   // 최초 설정
   useEffect(() => {
+    console.log("mounted");
+
     let arr = new Array(25);
     for (let i = 0; i < arr.length; ++i) {
       arr[i] = getCellNumber();
@@ -35,7 +43,7 @@ const Game = () => {
 
     setInterval(updateTime, 50);
 
-    console.log("mounted");
+    // TODO 게임종료 체크 인터벌
   }, []);
 
   const updateTime = () => {
@@ -54,7 +62,11 @@ const Game = () => {
   };
 
   const getTargetNumber = () => {
-    return parseInt(Math.random() * 5) + 1;
+    if (gameType === "1to20") {
+      return targetNumber + 1;
+    } else {
+      return parseInt(Math.random() * 5) + 1;
+    }
   };
 
   const getDragCellSum = () => {
@@ -68,6 +80,39 @@ const Game = () => {
     if (!dragCellList.includes(index)) {
       console.log("processDrag", index);
       setDragCellList([index, ...dragCellList]);
+    }
+  };
+
+  /**
+   * 정답이 맞는지 확인 및 처리
+   */
+  const checkAnswer = () => {
+    if (targetNumber === getDragCellSum()) {
+      console.log("정답");
+
+      // 정답 리스트 업데이트
+      setAnswerCellList([...dragCellList]);
+      setTimeout(() => {
+        setAnswerCellList([]);
+      }, 200);
+
+      // 타겟 넘버 업데이트
+      setTargetNumber(getTargetNumber());
+
+      // 맞힌 숫자 변경
+      const newNumberList = [...numberList];
+      for (let i = 0; i < dragCellList.length; ++i) {
+        newNumberList[dragCellList[i]] = getCellNumber();
+      }
+      setNumberList(newNumberList);
+
+      if (gameType === "1to20") {
+        //
+      } else {
+        //
+      }
+    } else {
+      console.log("오답");
     }
   };
 
@@ -91,7 +136,8 @@ const Game = () => {
     console.log("onMouseUp");
     console.log(dragCellList, getDragCellSum());
 
-    // TODO: 정답 체크
+    // 정답 체크
+    checkAnswer();
 
     setIsDrag(false);
     setDragCellList([]);
@@ -113,10 +159,12 @@ const Game = () => {
             <div className="card-header">TIME</div>
             <div className="card-body">{curTime}</div>
           </div>
-          <div className="card">
-            <div className="card-header">BEST</div>
-            <div className="card-body">10.22</div>
-          </div>
+          {gameType === "random" && (
+            <div className="card">
+              <div className="card-header">SCORE</div>
+              <div className="card-body">{score}</div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -128,6 +176,7 @@ const Game = () => {
             key={index}
             index={index}
             clicked={dragCellList.includes(index)}
+            isAnswer={answerCellList.includes(index)}
             onClickCell={onClickCell}
             onEnterCell={onEnterCell}
           />
