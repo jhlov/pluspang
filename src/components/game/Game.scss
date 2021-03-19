@@ -1,62 +1,78 @@
-.board {
-  display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  grid-template-columns: repeat(5, 1fr);
-  background-color: #bbada0;
-  border-radius: 4px;
-  width: 470px;
-  height: 470px;
-  gap: 15px;
-  padding: 15px;
+.board-wrapper {
+  padding-top: 100%;
+  position: relative;
+  .board {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    background-color: #bbada0;
+    border-radius: 4px;
+    gap: 15px;
+    padding: 15px;
 
-  .cell {
-    background: #eee4da;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 55px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    -ms-user-select: none;
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-
-    &.value2 {
-      background-color: #ede0c8;
+    @media screen and (max-width: 500px) {
+      gap: 10px;
+      padding: 10px;
     }
 
-    &.value3 {
-      color: #f9f6f2;
-      background: #f2b179;
-    }
+    .cell {
+      background: #eee4da;
+      border-radius: 3px;
+      text-align: center;
+      font-size: 55px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      -ms-user-select: none;
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
 
-    &.value4 {
-      color: #f9f6f2;
-      background: #f59563;
-    }
+      @media screen and (max-width: 500px) {
+        font-size: 36px;
+      }
 
-    &.clicked {
-      // background: #ede0c8;
-      //background-color: red;
-      border: 4px solid rgba(255, 255, 0, 0.7);
-      //box-shadow: 3px 3px 3px 3px white;
-      box-shadow: 0px 0px 5px 7px rgba(255, 255, 0, 0.4);
-      opacity: 0.9;
-    }
+      &.value2 {
+        background-color: #ede0c8;
+      }
 
-    &::selection {
-      background-color: unset;
-    }
+      &.value3 {
+        color: #f9f6f2;
+        background: #f2b179;
+      }
 
-    &.isAnswer {
-      transition: all 0.2s;
-      background-color: white;
-      opacity: 0;
-      transform: scale(1.3);
+      &.value4 {
+        color: #f9f6f2;
+        background: #f59563;
+      }
+
+      &.clicked {
+        // background: #ede0c8;
+        //background-color: red;
+        border: 4px solid rgba(255, 255, 0, 0.7);
+        //box-shadow: 3px 3px 3px 3px white;
+        box-shadow: 0px 0px 5px 7px rgba(255, 255, 0, 0.4);
+        opacity: 0.9;
+      }
+
+      &::selection {
+        background-color: unset;
+      }
+
+      &.isAnswer {
+        transition: all 0.2s;
+        background-color: white;
+        opacity: 0;
+        transform: scale(1.3);
+      }
     }
   }
 }

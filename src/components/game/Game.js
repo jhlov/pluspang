@@ -194,18 +194,20 @@ const Game = ({ history }) => {
       </div>
 
       {/* 하단 */}
-      <div className="board">
-        {numberList.map((number, index) => (
-          <Cell
-            value={number}
-            key={index}
-            index={index}
-            clicked={dragCellList.includes(index)}
-            isAnswer={answerCellList.includes(index)}
-            onClickCell={onClickCell}
-            onEnterCell={onEnterCell}
-          />
-        ))}
+      <div className="board-wrapper">
+        <div className="board">
+          {numberList.map((number, index) => (
+            <Cell
+              value={number}
+              key={index}
+              index={index}
+              clicked={dragCellList.includes(index)}
+              isAnswer={answerCellList.includes(index)}
+              onClickCell={onClickCell}
+              onEnterCell={onEnterCell}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
