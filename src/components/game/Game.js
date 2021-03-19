@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Cell from "components/game/Cell";
 import { useParams } from "react-router-dom";
 
-const Game = () => {
+const Game = ({ history }) => {
   // 숫자판
   const [numberList, setNumberList] = useState([]);
 
@@ -28,6 +28,9 @@ const Game = () => {
   // 점수
   const [score, setScore] = useState(0); // random 일 경우만
 
+  // 타이머 id
+  const [timerId, setTimerId] = useState(0);
+
   let { gameType } = useParams();
 
   // 최초 설정
@@ -41,7 +44,7 @@ const Game = () => {
     setNumberList(arr);
     setTargetNumber(getTargetNumber());
 
-    setInterval(updateTime, 50);
+    setTimerId(setInterval(updateTime, 50));
 
     // TODO 게임종료 체크 인터벌
   }, []);
@@ -57,7 +60,7 @@ const Game = () => {
 
   const getCellNumber = () => {
     // 작은 숫자가 많이 나오도록
-    const arr = [1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
+    const arr = [1, 1, 1, 2, 2, 3, 3, 4, 4];
     return arr[parseInt(Math.random() * arr.length)];
   };
 
@@ -99,6 +102,8 @@ const Game = () => {
       // 타겟 넘버 업데이트
       setTargetNumber(getTargetNumber());
 
+      console.log(targetNumber);
+
       // 맞힌 숫자 변경
       const newNumberList = [...numberList];
       for (let i = 0; i < dragCellList.length; ++i) {
@@ -107,7 +112,16 @@ const Game = () => {
       setNumberList(newNumberList);
 
       if (gameType === "1to20") {
-        //
+        // 완료 처리
+        if (19 < targetNumber) {
+          // 타이머 종료
+          clearInterval(timerId);
+
+          // 기록
+          alert(`GAME OVER!!\n\n${curTime}초!!`);
+
+          history.push("/");
+        }
       } else {
         //
       }

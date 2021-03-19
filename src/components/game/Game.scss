@@ -25,8 +25,27 @@
     -webkit-user-select: none;
     user-select: none;
 
+    &.value2 {
+      background-color: #ede0c8;
+    }
+
+    &.value3 {
+      color: #f9f6f2;
+      background: #f2b179;
+    }
+
+    &.value4 {
+      color: #f9f6f2;
+      background: #f59563;
+    }
+
     &.clicked {
-      background: #ede0c8;
+      // background: #ede0c8;
+      //background-color: red;
+      border: 4px solid rgba(255, 255, 0, 0.7);
+      //box-shadow: 3px 3px 3px 3px white;
+      box-shadow: 0px 0px 5px 7px rgba(255, 255, 0, 0.4);
+      opacity: 0.9;
     }
 
     &::selection {

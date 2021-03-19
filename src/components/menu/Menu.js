@@ -10,10 +10,10 @@ const Menu = () => {
       <Link to="/game/1to20" className="btn menu-item">
         1 to 20
       </Link>
-      <Link to="/game/random" className="btn menu-item">
+      <Link to="/game/random" className="btn menu-item disabled">
         random
       </Link>
-      <Link to="/rank" className="btn menu-item">
+      <Link to="/rank" className="btn menu-item disabled">
         rank
       </Link>
     </div>

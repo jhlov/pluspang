@@ -11,7 +11,7 @@ const Cell = ({
 }) => {
   return (
     <div
-      className={classNames("cell", { clicked, isAnswer })}
+      className={classNames(`cell value${value}`, { clicked, isAnswer })}
       onMouseDown={() => onClickCell(index)}
       onMouseEnter={() => onEnterCell(index)}
     >
