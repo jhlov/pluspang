@@ -7,6 +7,8 @@ const Cell = ({
   clicked,
   onClickCell,
   onEnterCell,
+  onTouchMove,
+  onMouseUp,
   isAnswer
 }) => {
   return (
@@ -14,6 +16,9 @@ const Cell = ({
       className={classNames(`cell value${value}`, { clicked, isAnswer })}
       onMouseDown={() => onClickCell(index)}
       onMouseEnter={() => onEnterCell(index)}
+      onTouchStart={() => onClickCell(index)}
+      onTouchMove={(e) => onTouchMove(e)}
+      onTouchEnd={onMouseUp}
     >
       {value}
     </div>

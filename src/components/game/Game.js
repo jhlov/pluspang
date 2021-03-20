@@ -1,6 +1,6 @@
 import "./Game.scss";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 
 import Cell from "components/game/Cell";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,9 @@ import { useParams } from "react-router-dom";
 const Game = ({ history }) => {
   // 숫자판
   const [numberList, setNumberList] = useState([]);
+
+  // 보드 ref
+  const boardRef = useRef();
 
   // 시간
   const [startTime, setStartTime] = useState(Date.now());
@@ -146,6 +149,30 @@ const Game = ({ history }) => {
     [isDrag, dragCellList]
   );
 
+  const onTouchMove = useCallback((e) => {
+    if (isDrag) {
+      const x = e.touches[0].clientX;
+      const y = e.touches[0].clientY;
+
+      for (let i = 0; i < boardRef.current.children.length; ++i) {
+        const child = boardRef.current.children[i];
+        const childX = child.getBoundingClientRect().x;
+        const width = child.getBoundingClientRect().width;
+        const childY = child.getBoundingClientRect().y;
+
+        if (
+          childX <= x &&
+          x <= childX + width &&
+          childY < y &&
+          y < childY + width
+        ) {
+          processDrag(i);
+          break;
+        }
+      }
+    }
+  });
+
   const onMouseUp = () => {
     console.log("onMouseUp");
     console.log(dragCellList, getDragCellSum());
@@ -195,7 +222,7 @@ const Game = ({ history }) => {
 
       {/* 하단 */}
       <div className="board-wrapper">
-        <div className="board">
+        <div className="board" ref={boardRef}>
           {numberList.map((number, index) => (
             <Cell
               value={number}
@@ -205,6 +232,8 @@ const Game = ({ history }) => {
               isAnswer={answerCellList.includes(index)}
               onClickCell={onClickCell}
               onEnterCell={onEnterCell}
+              onTouchMove={onTouchMove}
+              onMouseUp={onMouseUp}
             />
           ))}
         </div>
