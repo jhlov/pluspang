@@ -35,6 +35,7 @@
       -khtml-user-select: none;
       -webkit-user-select: none;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
 
       @media screen and (max-width: 500px) {
         font-size: 36px;
