@@ -151,7 +151,7 @@ const Game = ({ history }) => {
         // 종료 체크
         if (19 < targetNumber) {
           // 기록
-          alert(`GAME OVER!!\n\n${curTime}초!!`);
+          alert(`GAME OVER!!\n\n${curTime.toFixed(2)}초!!`);
 
           history.push("/");
         }
