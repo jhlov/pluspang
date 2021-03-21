@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/pluspang/static/css/main.b6867ce7.chunk.css",
-    "main.js": "/pluspang/static/js/main.8c498db7.chunk.js",
-    "main.js.map": "/pluspang/static/js/main.8c498db7.chunk.js.map",
-    "runtime-main.js": "/pluspang/static/js/runtime-main.230eeeb7.js",
-    "runtime-main.js.map": "/pluspang/static/js/runtime-main.230eeeb7.js.map",
-    "static/js/2.7d202ff6.chunk.js": "/pluspang/static/js/2.7d202ff6.chunk.js",
-    "static/js/2.7d202ff6.chunk.js.map": "/pluspang/static/js/2.7d202ff6.chunk.js.map",
-    "static/js/3.143c1297.chunk.js": "/pluspang/static/js/3.143c1297.chunk.js",
-    "static/js/3.143c1297.chunk.js.map": "/pluspang/static/js/3.143c1297.chunk.js.map",
+    "main.js": "/pluspang/static/js/main.9e01d05d.chunk.js",
+    "main.js.map": "/pluspang/static/js/main.9e01d05d.chunk.js.map",
+    "runtime-main.js": "/pluspang/static/js/runtime-main.3394eefd.js",
+    "runtime-main.js.map": "/pluspang/static/js/runtime-main.3394eefd.js.map",
+    "static/js/2.6c32eda1.chunk.js": "/pluspang/static/js/2.6c32eda1.chunk.js",
+    "static/js/2.6c32eda1.chunk.js.map": "/pluspang/static/js/2.6c32eda1.chunk.js.map",
+    "static/js/3.9d274173.chunk.js": "/pluspang/static/js/3.9d274173.chunk.js",
+    "static/js/3.9d274173.chunk.js.map": "/pluspang/static/js/3.9d274173.chunk.js.map",
     "index.html": "/pluspang/index.html",
     "static/css/main.b6867ce7.chunk.css.map": "/pluspang/static/css/main.b6867ce7.chunk.css.map",
-    "static/js/2.7d202ff6.chunk.js.LICENSE.txt": "/pluspang/static/js/2.7d202ff6.chunk.js.LICENSE.txt"
+    "static/js/2.6c32eda1.chunk.js.LICENSE.txt": "/pluspang/static/js/2.6c32eda1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.230eeeb7.js",
-    "static/js/2.7d202ff6.chunk.js",
+    "static/js/runtime-main.3394eefd.js",
+    "static/js/2.6c32eda1.chunk.js",
     "static/css/main.b6867ce7.chunk.css",
-    "static/js/main.8c498db7.chunk.js"
+    "static/js/main.9e01d05d.chunk.js"
   ]
 }
