@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/pluspang/static/css/main.4466a19a.chunk.css",
-    "main.js": "/pluspang/static/js/main.8eef1820.chunk.js",
-    "main.js.map": "/pluspang/static/js/main.8eef1820.chunk.js.map",
-    "runtime-main.js": "/pluspang/static/js/runtime-main.3394eefd.js",
-    "runtime-main.js.map": "/pluspang/static/js/runtime-main.3394eefd.js.map",
-    "static/js/2.ce15abdc.chunk.js": "/pluspang/static/js/2.ce15abdc.chunk.js",
-    "static/js/2.ce15abdc.chunk.js.map": "/pluspang/static/js/2.ce15abdc.chunk.js.map",
-    "static/js/3.9d274173.chunk.js": "/pluspang/static/js/3.9d274173.chunk.js",
-    "static/js/3.9d274173.chunk.js.map": "/pluspang/static/js/3.9d274173.chunk.js.map",
+    "main.js": "/pluspang/static/js/main.8df3fe9d.chunk.js",
+    "main.js.map": "/pluspang/static/js/main.8df3fe9d.chunk.js.map",
+    "runtime-main.js": "/pluspang/static/js/runtime-main.21fd7e73.js",
+    "runtime-main.js.map": "/pluspang/static/js/runtime-main.21fd7e73.js.map",
+    "static/js/2.52c5f959.chunk.js": "/pluspang/static/js/2.52c5f959.chunk.js",
+    "static/js/2.52c5f959.chunk.js.map": "/pluspang/static/js/2.52c5f959.chunk.js.map",
+    "static/js/3.a1b5f1f7.chunk.js": "/pluspang/static/js/3.a1b5f1f7.chunk.js",
+    "static/js/3.a1b5f1f7.chunk.js.map": "/pluspang/static/js/3.a1b5f1f7.chunk.js.map",
     "index.html": "/pluspang/index.html",
     "static/css/main.4466a19a.chunk.css.map": "/pluspang/static/css/main.4466a19a.chunk.css.map",
-    "static/js/2.ce15abdc.chunk.js.LICENSE.txt": "/pluspang/static/js/2.ce15abdc.chunk.js.LICENSE.txt"
+    "static/js/2.52c5f959.chunk.js.LICENSE.txt": "/pluspang/static/js/2.52c5f959.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3394eefd.js",
-    "static/js/2.ce15abdc.chunk.js",
+    "static/js/runtime-main.21fd7e73.js",
+    "static/js/2.52c5f959.chunk.js",
     "static/css/main.4466a19a.chunk.css",
-    "static/js/main.8eef1820.chunk.js"
+    "static/js/main.8df3fe9d.chunk.js"
   ]
 }
