@@ -18,4 +18,11 @@
       border: 0;
     }
   }
+
+  overscroll-behavior: contain;
+}
+
+body {
+  overscroll-behavior: contain;
+  overscroll-behavior-y: none;
 }
