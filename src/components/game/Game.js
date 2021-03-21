@@ -79,17 +79,32 @@ const Game = ({ history }) => {
     if (gameType === "1to20") {
       return targetNumber + 1;
     } else {
-      if (score < 1000) {
-        return parseInt(Math.random() * 5) + 4;
-      } else if (score < 2000) {
-        return parseInt(Math.random() * 5) + 5;
-      } else if (score < 2000) {
-        return parseInt(Math.random() * 8) + 5;
-      } else if (score < 3000) {
-        return parseInt(Math.random() * 8) + 6;
+      let min = 0;
+      let max = 0;
+
+      if (score < 2000) {
+        min = 4;
+        max = 9;
+      } else if (score < 4000) {
+        min = 5;
+        max = 10;
+      } else if (score < 6000) {
+        min = 5;
+        max = 13;
+      } else if (score < 8000) {
+        min = 6;
+        max = 14;
+      } else {
+        min = 6;
+        max = 15;
       }
 
-      return parseInt(Math.random() * 8) + 7;
+      while (true) {
+        const newNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (newNumber !== targetNumber) {
+          return newNumber;
+        }
+      }
     }
   };
 
