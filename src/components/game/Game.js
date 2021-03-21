@@ -56,19 +56,15 @@ const Game = ({ history }) => {
   const updateTime = () => {
     const deltaTime = (Date.now() - startTime) / 1000;
     if (gameType === "1to20") {
-      setCurTime(deltaTime.toFixed(2));
+      setCurTime(deltaTime);
     } else {
-      let newTime = Math.max(0, (60 - deltaTime).toFixed(2));
+      let newTime = Math.max(0, 60 - deltaTime);
       setCurTime(newTime);
 
       // 종료 처리
       if (newTime === 0) {
-        // 기록, 시간을 0으로 표시 하기 위해서 setTimeout 사용
-        setTimeout(() => {
-          alert(`GAME OVER!!\n\n${numberWithCommas(scoreRef.current)}점!!`);
-
-          history.push("/");
-        }, 0);
+        alert(`GAME OVER!!\n\n${numberWithCommas(scoreRef.current)}점!!`);
+        history.push("/");
       }
     }
   };
@@ -217,7 +213,7 @@ const Game = ({ history }) => {
       <div className="d-flex justify-content-flex-end">
         <div className="card none-drag">
           <div className="card-header">TIME</div>
-          <div className="card-body">{curTime}</div>
+          <div className="card-body">{curTime.toFixed(2)}</div>
         </div>
         {gameType === "1to20" && (
           <div className="card none-drag">
