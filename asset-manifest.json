@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/pluspang/static/css/main.1dd31ad5.chunk.css",
+    "main.css": "/pluspang/static/css/main.b6867ce7.chunk.css",
     "main.js": "/pluspang/static/js/main.8c498db7.chunk.js",
     "main.js.map": "/pluspang/static/js/main.8c498db7.chunk.js.map",
     "runtime-main.js": "/pluspang/static/js/runtime-main.230eeeb7.js",
@@ -10,13 +10,13 @@
     "static/js/3.143c1297.chunk.js": "/pluspang/static/js/3.143c1297.chunk.js",
     "static/js/3.143c1297.chunk.js.map": "/pluspang/static/js/3.143c1297.chunk.js.map",
     "index.html": "/pluspang/index.html",
-    "static/css/main.1dd31ad5.chunk.css.map": "/pluspang/static/css/main.1dd31ad5.chunk.css.map",
+    "static/css/main.b6867ce7.chunk.css.map": "/pluspang/static/css/main.b6867ce7.chunk.css.map",
     "static/js/2.7d202ff6.chunk.js.LICENSE.txt": "/pluspang/static/js/2.7d202ff6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.230eeeb7.js",
     "static/js/2.7d202ff6.chunk.js",
-    "static/css/main.1dd31ad5.chunk.css",
+    "static/css/main.b6867ce7.chunk.css",
     "static/js/main.8c498db7.chunk.js"
   ]
 }
