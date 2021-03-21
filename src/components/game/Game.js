@@ -244,21 +244,23 @@ const Game = ({ history }) => {
       </div>
 
       {/* 하단 */}
-      <div className="board-wrapper">
-        <div className="board" ref={boardRef}>
-          {numberList.map((number, index) => (
-            <Cell
-              value={number}
-              key={index}
-              index={index}
-              clicked={dragCellList.includes(index)}
-              isAnswer={answerCellList.includes(index)}
-              onClickCell={onClickCell}
-              onEnterCell={onEnterCell}
-              onTouchMove={onTouchMove}
-              onMouseUp={onMouseUp}
-            />
-          ))}
+      <div className="board-wrapper1">
+        <div className="board-wrapper2">
+          <div className="board" ref={boardRef}>
+            {numberList.map((number, index) => (
+              <Cell
+                value={number}
+                key={index}
+                index={index}
+                clicked={dragCellList.includes(index)}
+                isAnswer={answerCellList.includes(index)}
+                onClickCell={onClickCell}
+                onEnterCell={onEnterCell}
+                onTouchMove={onTouchMove}
+                onMouseUp={onMouseUp}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
