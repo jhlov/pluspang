@@ -14,7 +14,10 @@ const Cell = ({
 }) => {
   return (
     <div
-      className={classNames(`cell value${value}`, { clicked, isAnswer })}
+      className={classNames(`cell value${value} none-drag`, {
+        clicked,
+        isAnswer
+      })}
       onMouseDown={() => {
         if (isBrowser) {
           onClickCell(index);

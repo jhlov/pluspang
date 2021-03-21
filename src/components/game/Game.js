@@ -30,9 +30,8 @@ const Game = ({ history }) => {
 
   // 점수
   const [score, setScore] = useState(0); // random 일 경우만
-
-  // 타이머 id
-  const [timerId, setTimerId] = useState(0);
+  const scoreRef = useRef(score);
+  scoreRef.current = score;
 
   let { gameType } = useParams();
 
@@ -47,9 +46,11 @@ const Game = ({ history }) => {
     setNumberList(arr);
     setTargetNumber(getTargetNumber());
 
-    setTimerId(setInterval(updateTime, 50));
+    let timerId = setInterval(updateTime, 50);
 
-    // TODO 게임종료 체크 인터벌
+    return function cleanup() {
+      clearInterval(timerId);
+    };
   }, []);
 
   const updateTime = () => {
@@ -57,7 +58,18 @@ const Game = ({ history }) => {
     if (gameType === "1to20") {
       setCurTime(deltaTime.toFixed(2));
     } else {
-      setCurTime((60 - deltaTime).toFixed(2));
+      let newTime = Math.max(0, (60 - deltaTime).toFixed(2));
+      setCurTime(newTime);
+
+      // 종료 처리
+      if (newTime === 0) {
+        // 기록, 시간을 0으로 표시 하기 위해서 setTimeout 사용
+        setTimeout(() => {
+          alert(`GAME OVER!!\n\n${numberWithCommas(scoreRef.current)}점!!`);
+
+          history.push("/");
+        }, 0);
+      }
     }
   };
 
@@ -71,7 +83,17 @@ const Game = ({ history }) => {
     if (gameType === "1to20") {
       return targetNumber + 1;
     } else {
-      return parseInt(Math.random() * 5) + 1;
+      if (score < 1000) {
+        return parseInt(Math.random() * 5) + 4;
+      } else if (score < 2000) {
+        return parseInt(Math.random() * 5) + 5;
+      } else if (score < 2000) {
+        return parseInt(Math.random() * 8) + 5;
+      } else if (score < 3000) {
+        return parseInt(Math.random() * 8) + 6;
+      }
+
+      return parseInt(Math.random() * 8) + 7;
     }
   };
 
@@ -115,18 +137,15 @@ const Game = ({ history }) => {
       setNumberList(newNumberList);
 
       if (gameType === "1to20") {
-        // 완료 처리
+        // 종료 체크
         if (19 < targetNumber) {
-          // 타이머 종료
-          clearInterval(timerId);
-
           // 기록
           alert(`GAME OVER!!\n\n${curTime}초!!`);
 
           history.push("/");
         }
       } else {
-        //
+        setScore(score + 100 * dragCellList.length);
       }
     } else {
       console.log("오답");
@@ -184,38 +203,42 @@ const Game = ({ history }) => {
     setDragCellList([]);
   };
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <div onMouseUp={onMouseUp}>
       {/* 상단 */}
-      <div className="card card-number mb-20">
+      <div className="card card-number mb-20 none-drag">
         <div className="card-header">TARGET NUMBER</div>
         <div className="card-body">{targetNumber}</div>
       </div>
       <div className="d-flex justify-content-flex-end">
-        <div className="card">
+        <div className="card none-drag">
           <div className="card-header">TIME</div>
           <div className="card-body">{curTime}</div>
         </div>
         {gameType === "1to20" && (
-          <div className="card">
+          <div className="card none-drag">
             <div className="card-header">BEST-TIME</div>
-            <div className="card-body">{score}</div>
+            <div className="card-body">-</div>
           </div>
         )}
         {gameType === "random" && (
-          <div className="card">
+          <div className="card none-drag">
             <div className="card-header">SCORE</div>
-            <div className="card-body">{score}</div>
+            <div className="card-body">{numberWithCommas(score)}</div>
           </div>
         )}
         {gameType === "random" && (
-          <div className="card">
+          <div className="card none-drag">
             <div className="card-header">
               BEST
               <br />
               SCORE
             </div>
-            <div className="card-body">{score}</div>
+            <div className="card-body">-</div>
           </div>
         )}
       </div>

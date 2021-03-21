@@ -30,3 +30,15 @@ body {
   overscroll-behavior: contain;
   overscroll-behavior-y: none;
 }
+
+.none-drag {
+  // drag 방지
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+
+  // 파란색 하이라이트 제거
+  -webkit-tap-highlight-color: transparent;
+}
