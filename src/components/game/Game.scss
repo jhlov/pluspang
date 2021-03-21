@@ -41,6 +41,10 @@
         font-size: 36px;
       }
 
+      @media screen and (max-width: 320px) {
+        font-size: 30px;
+      }
+
       &.value2 {
         background-color: #ede0c8;
       }
