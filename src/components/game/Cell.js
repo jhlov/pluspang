@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { isBrowser } from "react-device-detect";
 
 const Cell = ({
   value,
@@ -14,8 +15,16 @@ const Cell = ({
   return (
     <div
       className={classNames(`cell value${value}`, { clicked, isAnswer })}
-      onMouseDown={() => onClickCell(index)}
-      onMouseEnter={() => onEnterCell(index)}
+      onMouseDown={() => {
+        if (isBrowser) {
+          onClickCell(index);
+        }
+      }}
+      onMouseEnter={() => {
+        if (isBrowser) {
+          onEnterCell(index);
+        }
+      }}
       onTouchStart={() => onClickCell(index)}
       onTouchMove={(e) => onTouchMove(e)}
       onTouchEnd={onMouseUp}
