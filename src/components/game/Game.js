@@ -4,9 +4,9 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import Cell from "components/game/Cell";
 import { useParams } from "react-router-dom";
+import RankHelper from "scripts/RankHelper";
 
 const Game = ({ history }) => {
-  const RANK_NUMBER = 10; // 랭킹 저장 수
   const LAST_TARGET_1TO20 = 20;
   const RANDOM_TIME = 60;
 
@@ -67,13 +67,16 @@ const Game = ({ history }) => {
 
       // 종료 처리
       if (newTime === 0) {
-        if (0 < scoreRef.current && isNewRecord()) {
+        if (
+          0 < scoreRef.current &&
+          RankHelper.isNewRecord(gameType, scoreRef.current)
+        ) {
           const name = prompt(
             `기록갱신\n\n${scoreRef.current}점!!\n\n이름을 등록해 주세요`
           );
 
           if (name) {
-            updateNewRecord(name, scoreRef.current);
+            RankHelper.updateNewRecord(gameType, name, scoreRef.current);
           }
         } else {
           alert(`GAME OVER!!\n\n${numberWithCommas(scoreRef.current)}점!!`);
@@ -137,51 +140,6 @@ const Game = ({ history }) => {
     }
   };
 
-  const getRecordList = () => {
-    if (gameType === "1to20") {
-      return localStorage.getItem("1to20")
-        ? JSON.parse(localStorage.getItem("1to20"))
-        : [];
-    } else {
-      return localStorage.getItem("random")
-        ? JSON.parse(localStorage.getItem("random"))
-        : [];
-    }
-  };
-
-  /**
-   * 신기록 갱신? 10위 안에 들었는지
-   */
-  const isNewRecord = () => {
-    const recordList = getRecordList();
-    if (gameType === "1to20") {
-      return (
-        recordList.length < RANK_NUMBER ||
-        curTime < recordList[recordList.length - 1].record
-      );
-    } else {
-      return (
-        recordList.length < RANK_NUMBER ||
-        recordList[recordList.length - 1].record < scoreRef.current
-      );
-    }
-  };
-
-  const updateNewRecord = (name, record) => {
-    let recordList = getRecordList();
-    recordList.push({ name: name, record: record });
-    if (gameType === "1to20") {
-      recordList = recordList.sort((a, b) => a.record - b.record);
-    } else {
-      recordList = recordList.sort((a, b) => b.record - a.record);
-    }
-
-    localStorage.setItem(
-      gameType,
-      JSON.stringify(recordList.slice(0, RANK_NUMBER))
-    );
-  };
-
   /**
    * 정답이 맞는지 확인 및 처리
    */
@@ -210,13 +168,13 @@ const Game = ({ history }) => {
         // 종료 체크
         if (LAST_TARGET_1TO20 < newTargetNum) {
           // 기록
-          if (isNewRecord()) {
+          if (RankHelper.isNewRecord(gameType, curTime.toFixed(2))) {
             const name = prompt(
               `기록갱신\n\n${curTime.toFixed(2)}초!!\n\n이름을 등록해 주세요`
             );
 
             if (name) {
-              updateNewRecord(name, curTime.toFixed(2));
+              RankHelper.updateNewRecord(gameType, name, curTime.toFixed(2));
             }
           } else {
             alert(`GAME OVER!!\n\n${curTime.toFixed(2)}초!!`);
