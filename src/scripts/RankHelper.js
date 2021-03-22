@@ -1,6 +1,14 @@
 const MAX_RANKER = 10; // 랭킹 저장 수
 
 const RankHelper = {
+  reset: () => {
+    localStorage.setItem("1to20", "[]");
+    localStorage.setItem("random", "[]");
+  },
+  getBestRecord: (gameType) => {
+    const recordList = RankHelper.getRecordList(gameType);
+    return 0 < recordList.length ? recordList[0].record : "-";
+  },
   getRecordList: (gameType) => {
     if (gameType === "1to20") {
       return localStorage.getItem("1to20")

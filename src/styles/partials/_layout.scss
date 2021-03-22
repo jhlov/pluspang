@@ -40,7 +40,7 @@
 }
 
 // margin padding
-@for $i from 1 through 10 {
+@for $i from 1 through 20 {
   .m-#{$i * 4} {
     margin: #{$i * 4}px !important;
   }
@@ -100,4 +100,12 @@
   .pb-#{$i * 4} {
     padding-bottom: #{$i * 4}px !important;
   }
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
 }

@@ -13,7 +13,7 @@ const Menu = () => {
       <Link to="/game/random" className="btn menu-item none-drag">
         random
       </Link>
-      <Link to="/rank" className="btn menu-item disabled none-drag">
+      <Link to="/rank" className="btn menu-item none-drag">
         rank
       </Link>
     </div>

@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 import RankHelper from "scripts/RankHelper";
 
 const Game = ({ history }) => {
-  const LAST_TARGET_1TO20 = 20;
-  const RANDOM_TIME = 60;
+  const LAST_TARGET_1TO20 = 3;
+  const RANDOM_TIME = 6;
 
   // 숫자판
   const [numberList, setNumberList] = useState([]);
@@ -143,7 +143,7 @@ const Game = ({ history }) => {
   /**
    * 정답이 맞는지 확인 및 처리
    */
-  const checkAnswer = () => {
+  const checkAnswer = useCallback(() => {
     if (targetNumber === getDragCellSum()) {
       console.log("정답");
 
@@ -188,7 +188,7 @@ const Game = ({ history }) => {
     } else {
       console.log("오답");
     }
-  };
+  });
 
   const onClickCell = useCallback((index) => {
     console.log("onClickCell", index);
@@ -260,7 +260,9 @@ const Game = ({ history }) => {
         {gameType === "1to20" && (
           <div className="card none-drag">
             <div className="card-header">BEST-TIME</div>
-            <div className="card-body">-</div>
+            <div className="card-body">
+              {RankHelper.getBestRecord(gameType)}
+            </div>
           </div>
         )}
         {gameType === "random" && (
@@ -276,7 +278,9 @@ const Game = ({ history }) => {
               <br />
               SCORE
             </div>
-            <div className="card-body">-</div>
+            <div className="card-body">
+              {RankHelper.getBestRecord(gameType)}
+            </div>
           </div>
         )}
       </div>
