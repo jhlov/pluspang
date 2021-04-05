@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-import "./Rank.scss";
 import RankHelper from "scripts/RankHelper";
+import "./Rank.scss";
 
 const Rank = () => {
   const [oneto20RankList, set1to20RankList] = useState(
@@ -12,14 +11,16 @@ const Rank = () => {
     RankHelper.getRecordList("random")
   );
 
-  const numberWithCommas = (x) => {
+  const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   const onClickReset = () => {
-    RankHelper.reset();
-    set1to20RankList([]);
-    setRandomRankList([]);
+    if (window.confirm("정말 초기화 하시겠습니가?")) {
+      RankHelper.reset();
+      set1to20RankList([]);
+      setRandomRankList([]);
+    }
   };
 
   return (
@@ -28,7 +29,8 @@ const Rank = () => {
       <ul className="mb-20">
         {oneto20RankList.map((e, index) => (
           <li className="d-flex">
-            {index + 1}. <span className="name ml-20"> {e.name}</span>{" "}
+            <span>{index + 1}. </span>
+            <span className="name"> {e.name}</span>{" "}
             <span className="ml-auto">{e.record}초</span>
           </li>
         ))}

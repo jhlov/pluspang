@@ -11,6 +11,12 @@ ul {
     list-style-type: none;
     font-size: 16px;
 
+    span {
+      &:first-child {
+        width: 30px;
+      }
+    }
+
     .name {
       flex: 1;
       text-overflow: ellipsis;

@@ -1,14 +1,12 @@
-import "./Game.scss";
-
-import React, { useCallback, useEffect, useRef, useState } from "react";
-
 import Cell from "components/game/Cell";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import RankHelper from "scripts/RankHelper";
+import "./Game.scss";
 
 const Game = ({ history }) => {
-  const LAST_TARGET_1TO20 = 3;
-  const RANDOM_TIME = 6;
+  const LAST_TARGET_1TO20 = 20;
+  const RANDOM_TIME = 60;
 
   // 숫자판
   const [numberList, setNumberList] = useState([]);
@@ -133,7 +131,7 @@ const Game = ({ history }) => {
     );
   };
 
-  const processDrag = (index) => {
+  const processDrag = index => {
     if (!dragCellList.includes(index)) {
       console.log("processDrag", index);
       setDragCellList([index, ...dragCellList]);
@@ -190,14 +188,14 @@ const Game = ({ history }) => {
     }
   });
 
-  const onClickCell = useCallback((index) => {
+  const onClickCell = useCallback(index => {
     console.log("onClickCell", index);
     setIsDrag(true);
     processDrag(index);
   }, []);
 
   const onEnterCell = useCallback(
-    (index) => {
+    index => {
       if (isDrag) {
         console.log("onEnterCell", index);
         processDrag(index);
@@ -206,7 +204,7 @@ const Game = ({ history }) => {
     [isDrag, dragCellList]
   );
 
-  const onTouchMove = useCallback((e) => {
+  const onTouchMove = useCallback(e => {
     if (isDrag) {
       const x = e.touches[0].clientX;
       const y = e.touches[0].clientY;
@@ -241,7 +239,7 @@ const Game = ({ history }) => {
     setDragCellList([]);
   };
 
-  const numberWithCommas = (x) => {
+  const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
