@@ -70,10 +70,12 @@ const Game = ({ history }) => {
           RankHelper.isNewRecord(gameType, scoreRef.current)
         ) {
           const name = prompt(
-            `기록갱신\n\n${scoreRef.current}점!!\n\n이름을 등록해 주세요`
+            `기록갱신\n\n${scoreRef.current}점!!\n\n이름을 등록해 주세요`,
+            localStorage.getItem("name") ?? ""
           );
 
           if (name) {
+            localStorage.setItem("name", name);
             RankHelper.updateNewRecord(gameType, name, scoreRef.current);
           }
         } else {
@@ -168,10 +170,12 @@ const Game = ({ history }) => {
           // 기록
           if (RankHelper.isNewRecord(gameType, curTime.toFixed(2))) {
             const name = prompt(
-              `기록갱신\n\n${curTime.toFixed(2)}초!!\n\n이름을 등록해 주세요`
+              `기록갱신\n\n${curTime.toFixed(2)}초!!\n\n이름을 등록해 주세요`,
+              localStorage.getItem("name") ?? ""
             );
 
             if (name) {
+              localStorage.setItem("name", name);
               RankHelper.updateNewRecord(gameType, name, curTime.toFixed(2));
             }
           } else {

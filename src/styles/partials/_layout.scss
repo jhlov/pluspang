@@ -18,8 +18,12 @@
   }
 }
 
-// height
+// width, height
 @each $i in (10, 25, 50, 100) {
+  .w-#{$i} {
+    width: #{$i}#{"%"};
+  }
+
   .h-#{$i} {
     height: #{$i}#{"%"};
   }
