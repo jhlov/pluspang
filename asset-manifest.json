@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/pluspang/static/css/main.36cf2fc3.chunk.css",
-    "main.js": "/pluspang/static/js/main.bb594759.chunk.js",
-    "main.js.map": "/pluspang/static/js/main.bb594759.chunk.js.map",
+    "main.js": "/pluspang/static/js/main.18916625.chunk.js",
+    "main.js.map": "/pluspang/static/js/main.18916625.chunk.js.map",
     "runtime-main.js": "/pluspang/static/js/runtime-main.87327506.js",
     "runtime-main.js.map": "/pluspang/static/js/runtime-main.87327506.js.map",
     "static/js/2.6aa6fd3b.chunk.js": "/pluspang/static/js/2.6aa6fd3b.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.87327506.js",
     "static/js/2.6aa6fd3b.chunk.js",
     "static/css/main.36cf2fc3.chunk.css",
-    "static/js/main.bb594759.chunk.js"
+    "static/js/main.18916625.chunk.js"
   ]
 }
