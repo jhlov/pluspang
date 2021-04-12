@@ -1,52 +1,33 @@
+import axios from "axios";
+
 const MAX_RANKER = 10; // 랭킹 저장 수
 
 const RankHelper = {
-  reset: () => {
-    localStorage.setItem("1to20", "[]");
-    localStorage.setItem("random", "[]");
-  },
-  getBestRecord: gameType => {
-    const recordList = RankHelper.getRecordList(gameType);
-    return 0 < recordList.length ? recordList[0].record : "-";
-  },
-  getRecordList: gameType => {
-    if (gameType === "1to20") {
-      return localStorage.getItem("1to20")
-        ? JSON.parse(localStorage.getItem("1to20"))
-        : [];
-    } else {
-      return localStorage.getItem("random")
-        ? JSON.parse(localStorage.getItem("random"))
-        : [];
-    }
-  },
-  isNewRecord: (gameType, record) => {
-    const recordList = RankHelper.getRecordList(gameType);
-    if (gameType === "1to20") {
-      return (
-        recordList.length < MAX_RANKER ||
-        record < recordList[recordList.length - 1].record
-      );
-    } else {
-      return (
-        recordList.length < MAX_RANKER ||
-        recordList[recordList.length - 1].record < record
-      );
-    }
-  },
-  updateNewRecord: (gameType, name, record) => {
-    let recordList = RankHelper.getRecordList(gameType);
-    recordList.push({ name: name, record: record });
-    if (gameType === "1to20") {
-      recordList = recordList.sort((a, b) => a.record - b.record);
-    } else {
-      recordList = recordList.sort((a, b) => b.record - a.record);
+  MAX_RANKER: 10, // 랭킹 저장 수
+  getRecordList: async gameType => {
+    const data = await axios.get(
+      `https://pluspang-default-rtdb.firebaseio.com/${gameType}.json`
+    );
+
+    if (!data.data) {
+      return [];
     }
 
-    localStorage.setItem(
-      gameType,
-      JSON.stringify(recordList.slice(0, MAX_RANKER))
-    );
+    let arr = [];
+    for (const [key, value] of Object.entries(data.data)) {
+      arr.push({
+        name: key,
+        record: value
+      });
+    }
+
+    if (gameType === "1to20") {
+      arr = arr.sort((a, b) => a.record - b.record);
+    } else {
+      arr = arr.sort((a, b) => b.record - a.record);
+    }
+
+    return arr.slice(0, MAX_RANKER);
   }
 };
 

@@ -1,26 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RankHelper from "scripts/RankHelper";
 import "./Rank.scss";
 
 const Rank = () => {
-  const [oneto20RankList, set1to20RankList] = useState(
-    RankHelper.getRecordList("1to20")
-  );
-  const [randomRankList, setRandomRankList] = useState(
-    RankHelper.getRecordList("random")
-  );
+  const [oneto20RankList, set1to20RankList] = useState([]);
+  const [randomRankList, setRandomRankList] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const _oneto20RankList = await RankHelper.getRecordList("1to20");
+      set1to20RankList(_oneto20RankList);
+
+      const _randomRankList = await RankHelper.getRecordList("random");
+      setRandomRankList(_randomRankList);
+    }
+    fetchData();
+  }, []);
 
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
-  const onClickReset = () => {
-    if (window.confirm("정말 초기화 하시겠습니가?")) {
-      RankHelper.reset();
-      set1to20RankList([]);
-      setRandomRankList([]);
-    }
   };
 
   return (
@@ -52,9 +51,6 @@ const Rank = () => {
         <Link to="/" className="btn mb-8">
           메뉴
         </Link>
-        <button className="btn" onClick={onClickReset}>
-          초기화
-        </button>
       </div>
     </div>
   );

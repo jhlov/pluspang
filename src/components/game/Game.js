@@ -1,3 +1,4 @@
+import axios from "axios";
 import Cell from "components/game/Cell";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -31,9 +32,13 @@ const Game = ({ history }) => {
   const [targetNumber, setTargetNumber] = useState(0);
 
   // 점수
+  const [recordList, setRecordList] = useState([]);
+  const [bestRecord, setBestRecord] = useState("-");
   const [score, setScore] = useState(0); // random 일 경우만
   const scoreRef = useRef(score);
+  const recordListRef = useRef(recordList);
   scoreRef.current = score;
+  recordListRef.current = recordList;
 
   let { gameType } = useParams();
 
@@ -48,12 +53,34 @@ const Game = ({ history }) => {
     setNumberList(arr);
     setTargetNumber(getTargetNumber());
 
+    // recordList
+    async function fetchData() {
+      const recordList = await RankHelper.getRecordList(gameType);
+      setRecordList(recordList);
+      setBestRecord(0 < recordList.length ? recordList[0].record : "-");
+    }
+    fetchData();
+
     let timerId = setInterval(updateTime, 50);
 
     return function cleanup() {
       clearInterval(timerId);
     };
   }, []);
+
+  const isNewRecord = record => {
+    if (gameType === "1to20") {
+      return (
+        recordList.length < RankHelper.MAX_RANKER ||
+        record < recordList[recordList.length - 1].record
+      );
+    } else {
+      return (
+        recordList.length < RankHelper.MAX_RANKER ||
+        recordList[recordList.length - 1].record < record
+      );
+    }
+  };
 
   const updateTime = () => {
     const deltaTime = (Date.now() - startTime) / 1000;
@@ -65,18 +92,27 @@ const Game = ({ history }) => {
 
       // 종료 처리
       if (newTime === 0) {
-        if (
-          0 < scoreRef.current &&
-          RankHelper.isNewRecord(gameType, scoreRef.current)
-        ) {
+        if (0 < scoreRef.current && isNewRecord(scoreRef.current)) {
           const name = prompt(
             `기록갱신\n\n${scoreRef.current}점!!\n\n이름을 등록해 주세요`,
             localStorage.getItem("name") ?? ""
           );
 
           if (name) {
+            if (
+              !recordListRef.current.find(
+                e => e.name === name && scoreRef.current < e.record
+              )
+            ) {
+              axios.patch(
+                `https://pluspang-default-rtdb.firebaseio.com/${gameType}.json`,
+                {
+                  [name]: scoreRef.current
+                }
+              );
+            }
+
             localStorage.setItem("name", name);
-            RankHelper.updateNewRecord(gameType, name, scoreRef.current);
           }
         } else {
           alert(`GAME OVER!!\n\n${numberWithCommas(scoreRef.current)}점!!`);
@@ -168,15 +204,25 @@ const Game = ({ history }) => {
         // 종료 체크
         if (LAST_TARGET_1TO20 < newTargetNum) {
           // 기록
-          if (RankHelper.isNewRecord(gameType, curTime.toFixed(2))) {
+          if (isNewRecord(curTime.toFixed(2))) {
             const name = prompt(
               `기록갱신\n\n${curTime.toFixed(2)}초!!\n\n이름을 등록해 주세요`,
               localStorage.getItem("name") ?? ""
             );
 
             if (name) {
+              if (
+                !recordList.find(e => e.name === name && e.record < curTime)
+              ) {
+                axios.patch(
+                  `https://pluspang-default-rtdb.firebaseio.com/${gameType}.json`,
+                  {
+                    [name]: parseFloat(curTime.toFixed(2))
+                  }
+                );
+              }
+
               localStorage.setItem("name", name);
-              RankHelper.updateNewRecord(gameType, name, curTime.toFixed(2));
             }
           } else {
             alert(`GAME OVER!!\n\n${curTime.toFixed(2)}초!!`);
@@ -262,9 +308,7 @@ const Game = ({ history }) => {
         {gameType === "1to20" && (
           <div className="card none-drag">
             <div className="card-header">BEST-TIME</div>
-            <div className="card-body">
-              {RankHelper.getBestRecord(gameType)}
-            </div>
+            <div className="card-body">{bestRecord}</div>
           </div>
         )}
         {gameType === "random" && (
@@ -280,9 +324,7 @@ const Game = ({ history }) => {
               <br />
               SCORE
             </div>
-            <div className="card-body">
-              {RankHelper.getBestRecord(gameType)}
-            </div>
+            <div className="card-body">{bestRecord}</div>
           </div>
         )}
       </div>
