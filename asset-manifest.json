@@ -1,23 +1,18 @@
 {
   "files": {
-    "main.css": "/pluspang/static/css/main.36cf2fc3.chunk.css",
+    "main.css": "/pluspang/static/css/main.390183aa.chunk.css",
     "main.js": "/pluspang/static/js/main.18916625.chunk.js",
-    "main.js.map": "/pluspang/static/js/main.18916625.chunk.js.map",
     "runtime-main.js": "/pluspang/static/js/runtime-main.87327506.js",
-    "runtime-main.js.map": "/pluspang/static/js/runtime-main.87327506.js.map",
     "static/js/2.6aa6fd3b.chunk.js": "/pluspang/static/js/2.6aa6fd3b.chunk.js",
-    "static/js/2.6aa6fd3b.chunk.js.map": "/pluspang/static/js/2.6aa6fd3b.chunk.js.map",
     "static/js/3.ced12f49.chunk.js": "/pluspang/static/js/3.ced12f49.chunk.js",
-    "static/js/3.ced12f49.chunk.js.map": "/pluspang/static/js/3.ced12f49.chunk.js.map",
     "index.html": "/pluspang/index.html",
-    "static/css/main.36cf2fc3.chunk.css.map": "/pluspang/static/css/main.36cf2fc3.chunk.css.map",
     "static/js/2.6aa6fd3b.chunk.js.LICENSE.txt": "/pluspang/static/js/2.6aa6fd3b.chunk.js.LICENSE.txt",
     "static/media/howto.f9e9d9e5.png": "/pluspang/static/media/howto.f9e9d9e5.png"
   },
   "entrypoints": [
     "static/js/runtime-main.87327506.js",
     "static/js/2.6aa6fd3b.chunk.js",
-    "static/css/main.36cf2fc3.chunk.css",
+    "static/css/main.390183aa.chunk.css",
     "static/js/main.18916625.chunk.js"
   ]
 }
